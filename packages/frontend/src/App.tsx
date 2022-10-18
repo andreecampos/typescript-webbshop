@@ -7,8 +7,6 @@ import RegisterPage from "./pages/RegisterPage";
 import ShoppingCartPage from "./pages/ShoppingCartPage";
 
 function App() {
-  const [text, setText] = useState<string>("");
-  const [messages, setMessages] = useState<string[]>([]);
   return (
     <div>
       <Router>
