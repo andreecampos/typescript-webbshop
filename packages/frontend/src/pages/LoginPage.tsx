@@ -8,7 +8,8 @@ export default function LoginPage() {
   const [password, setPassword] = useState<string>("");
 
   const sendToBackend = async (): Promise<void | string> => {
-    const send = await axios.post("/");
+    const send = await axios.post("/login", { username, password });
+    console.log(send.data);
   };
 
   return (
@@ -17,9 +18,17 @@ export default function LoginPage() {
 
       <form className="login" onSubmit={sendToBackend}>
         username{" "}
-        <input type="text" value={username} onChange={(e) => e.target.value} />
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
         password{" "}
-        <input type="text" value={password} onChange={(e) => e.target.value} />
+        <input
+          type="text"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <button type="submit"> send </button>
       </form>
     </div>
