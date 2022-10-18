@@ -1,1 +1,1 @@
-export { user_interface } from "./User-Interface";
+export type { user_interface } from "./User-Interface";
