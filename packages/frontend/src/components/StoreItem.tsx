@@ -1,4 +1,6 @@
 import { Card } from "react-bootstrap"
+import React from 'react'
+
 
 export interface StoreItemProps {
     id: number,
@@ -12,7 +14,9 @@ export interface StoreItemProps {
 }
 export  function StoreItem( {  name, price, imgUrl} : StoreItemProps) {
   return (
-    <Card>StoreItem
+
+
+         <Card>StoreItem
 
        <Card.Img
         variant="top"
@@ -30,5 +34,8 @@ export  function StoreItem( {  name, price, imgUrl} : StoreItemProps) {
 
 
     </Card>
+
+   
+
   )
 }

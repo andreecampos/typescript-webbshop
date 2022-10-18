@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import storeItems from "../data/items.json"
 import { Col, Row } from "react-bootstrap"
 import  { StoreItem } from "../components/StoreItem"
-import { ProductDetail } from './ProductDetail'
+
 
 export default function ProductsPage() {
   return (
@@ -19,7 +19,6 @@ export default function ProductsPage() {
            <Link to={`/details/${item.id}`}>
               <StoreItem {...item} /> 
           </Link>
-          <ProductDetail {...item}/>
             </Col>  
         ))}
       </Row>
