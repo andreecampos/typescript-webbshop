@@ -2,7 +2,11 @@
   "name": "@webbshop-app/shared",
   "version": "1.0.0",
   "description": "",
-  "main": "src/interfaces.ts",
+  "type": "module",
+  "exports": {
+    "./*": "./src/*"
+  },
+  "main": ".src/index.ts",
   "scripts": {
     "build": "tsc"
   },
