@@ -7,15 +7,13 @@ import RegisterPage from "./pages/RegisterPage";
 import ShoppingCartPage from "./pages/ShoppingCartPage";
 
 function App() {
-  const [text, setText] = useState<string>("");
-  const [messages, setMessages] = useState<string[]>([]);
   return (
     <div>
       <Router>
         <Routes>
-          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/" element={<ProductPage />} />
+          <Route path="/products" element={<ProductPage />} />
           <Route path="/cart" element={<ShoppingCartPage />} />
         </Routes>
       </Router>
