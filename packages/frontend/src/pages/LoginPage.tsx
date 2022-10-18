@@ -16,7 +16,7 @@ export default function LoginPage() {
     <div>
       <h1>LoginPage</h1>
 
-      <form className="login" onSubmit={sendToBackend}>
+      <form className="login">
         username{" "}
         <input
           type="text"
@@ -29,7 +29,7 @@ export default function LoginPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit"> send </button>
+        <button onClick={(e) => sendToBackend}> send </button>
       </form>
     </div>
   );
