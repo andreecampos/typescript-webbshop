@@ -6,10 +6,11 @@ axios.defaults.baseURL = "http://localhost:3001";
 export default function RegisterPage() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [res, setRes] = useState<string>("");
 
   const sendToBackend = async () => {
     const send = await axios.post("/CreateUser", { username, password });
-    console.log(send.data);
+    setRes(send.data);
   };
 
   return (
@@ -31,6 +32,7 @@ export default function RegisterPage() {
         />
         <button onClick={(e) => sendToBackend()}> send </button>
       </div>
+      {res}
     </div>
   );
 }
