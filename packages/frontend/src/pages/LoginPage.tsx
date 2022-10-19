@@ -16,7 +16,7 @@ export default function LoginPage() {
     <div>
       <h1>LoginPage</h1>
 
-      <form className="login">
+      <div className="login">
         username{" "}
         <input
           type="text"
@@ -29,8 +29,8 @@ export default function LoginPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={(e) => sendToBackend}> send </button>
-      </form>
+        <button onClick={(e) => sendToBackend()}> send </button>
+      </div>
     </div>
   );
 }

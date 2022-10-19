@@ -8,7 +8,7 @@ export default function RegisterPage() {
   const [password, setPassword] = useState<string>("");
 
   const sendToBackend = async () => {
-    const send = await axios.post("/createUser", { username, password });
+    const send = await axios.post("/CreateUser", { username, password });
     console.log(send.data);
   };
 
@@ -16,7 +16,7 @@ export default function RegisterPage() {
     <div>
       <h1>RegisterPage</h1>
 
-      <form className="login">
+      <div className="Register">
         username{" "}
         <input
           type="text"
@@ -29,8 +29,8 @@ export default function RegisterPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={(e) => sendToBackend}> send </button>
-      </form>
+        <button onClick={(e) => sendToBackend()}> send </button>
+      </div>
     </div>
   );
 }
