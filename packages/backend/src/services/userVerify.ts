@@ -17,7 +17,7 @@ export const userVerify = async (items: user_interface) => {
             expiresIn: "1800s",
           }
         );
-        console.log(token);
+        return { token };
       }
     } catch {
       return "wrong username or password";
