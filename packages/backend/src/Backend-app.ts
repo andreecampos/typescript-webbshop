@@ -11,7 +11,7 @@ app.use(cors());
 app.use(json());
 app.use("/CreateUser", User_Controller);
 
-const port: number = parseInt(process.env.SERVER_PORT || "3001");
+const port: number = parseInt(process.env.SERVER_PORT || "4000");
 
 app.listen(port, async function () {
   await setUpMongoDb(mongoUrl);

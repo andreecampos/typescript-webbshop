@@ -6,10 +6,12 @@ axios.defaults.baseURL = "http://localhost:4000";
 export default function LoginPage() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [res, setRes] = useState<string>("");
 
   const sendToBackend = async (): Promise<void | string> => {
-    const send = await axios.post("/login", { username, password });
-    console.log(send.data);
+    console.log(username, password);
+    const send = await axios.post("/CreateUser/login", { username, password });
+    setRes(send.data);
   };
 
   return (
@@ -31,6 +33,7 @@ export default function LoginPage() {
         />
         <button onClick={(e) => sendToBackend()}> send </button>
       </div>
+      {res}
     </div>
   );
 }
