@@ -1,6 +1,6 @@
 import express, { Router, Request, Response } from "express";
 import { user_interface } from "@webbshop-app/shared";
-import { checkUser, saveUser } from "../Models/userModel";
+import { saveUser } from "../Models/userModel";
 import { userVerify } from "../services/userVerify";
 
 const User_Controller = express.Router();

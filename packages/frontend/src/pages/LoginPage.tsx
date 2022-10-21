@@ -1,16 +1,30 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { user_interface } from "@webbshop-app/shared";
 
 axios.defaults.baseURL = "http://localhost:4000";
 
 export default function LoginPage() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [res, setRes] = useState<string>("");
+  const [res, setRes] = useState<string | user_interface>("");
+
+  const navigate = useNavigate();
 
   const sendToBackend = async (): Promise<void | string> => {
     console.log(username, password);
-    const send = await axios.post("/CreateUser/login", { username, password });
+    const send = await axios.post<user_interface>("/CreateUser/login", {
+      username,
+      password,
+    });
+
+    if (typeof send.data === "object") {
+      const token = send.data.token;
+      localStorage.setItem("jwt", token);
+      navigate("/products");
+    }
+
     setRes(send.data);
   };
 
@@ -33,7 +47,7 @@ export default function LoginPage() {
         />
         <button onClick={(e) => sendToBackend()}> send </button>
       </div>
-      {res}
+      <> {res}</>
     </div>
   );
 }
