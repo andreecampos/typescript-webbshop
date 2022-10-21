@@ -4,7 +4,9 @@ import jwt from "jsonwebtoken";
 
 const JWT_SECRET = "hgvdfhbsadfvasdfjvdf";
 
-export const userVerify = async (items: user_interface) => {
+export const userVerify = async (
+  items: user_interface
+): Promise<string | object | undefined> => {
   if (items.username != "" && items.password != "") {
     try {
       const getUser = await checkUser(items);

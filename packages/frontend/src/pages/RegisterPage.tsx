@@ -7,22 +7,29 @@ axios.defaults.baseURL = "http://localhost:4000";
 
 export default function RegisterPage() {
   const [username, setUsername] = useState<string>("");
+  const [mail, setMail] = useState<string>("");
+  const [phoneNr, setPhoneNr] = useState<number>();
+  const [address, setAddress] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [res, setRes] = useState<string>("");
+  const [res, setRes] = useState<string | user_interface>("");
   const [enableButton, setEnableButton] = useState<boolean>(true);
 
   const navigate = useNavigate();
 
   const sendToBackend = async (): Promise<void> => {
-    const send = await axios.post("/CreateUser", {
+    const send = await axios.post<user_interface>("/CreateUser", {
       username,
+      mail,
+      phoneNr,
+      address,
       password,
     });
 
     const getData = send.data;
     setRes(getData);
-    if (getData === true) {
+    if (typeof getData === "boolean") {
       setEnableButton(false);
+      setRes("");
     }
   };
 
@@ -36,6 +43,24 @@ export default function RegisterPage() {
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+        />
+        mail{" "}
+        <input
+          type="text"
+          value={mail}
+          onChange={(e) => setMail(e.target.value)}
+        />
+        Phone number{" "}
+        <input
+          type="number"
+          value={phoneNr}
+          onChange={(e) => setPhoneNr(Number(e.target.value))}
+        />
+        Address{" "}
+        <input
+          type="text"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
         />
         password{" "}
         <input

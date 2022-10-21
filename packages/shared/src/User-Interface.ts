@@ -3,4 +3,7 @@ export interface user_interface {
   _id?: string;
   username: string;
   password: string;
+  phoneNr: number;
+  address: string;
+  mail: string;
 }

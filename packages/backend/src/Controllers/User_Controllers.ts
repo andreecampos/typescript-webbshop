@@ -13,10 +13,10 @@ User_Controller.post(
         await saveUser(req.body);
         res.send(true);
       } catch {
-        res.send("username has already been taken");
+        res.send("username or email already exist");
       }
     } else {
-      res.send("write both username and password");
+      res.send("fyll all fields");
     }
   }
 );
@@ -29,23 +29,5 @@ User_Controller.post(
     res.send(getValidUser);
   }
 );
-
-// User_Controller.post(
-//   "/login",
-//   async (req: Request<user_interface>, res: Response) => {
-//     const reqBody = req.body;
-//     if (reqBody.username != "" && reqBody.password != "") {
-//       try {
-//         const getUser = await checkUser(reqBody);
-//         console.log(getUser);
-//         res.send("");
-//       } catch {
-//         res.send("wrong username or password");
-//       }
-//     } else {
-//       res.send("write both username and password");
-//     }
-//   }
-// );
 
 export default User_Controller;
