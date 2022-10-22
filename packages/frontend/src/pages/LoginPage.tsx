@@ -14,7 +14,7 @@ export default function LoginPage() {
 
   const sendToBackend = async (): Promise<void | string> => {
     console.log(username, password);
-    const send = await axios.post<user_interface>("/CreateUser/login", {
+    const send = await axios.post<user_interface>("/login", {
       username,
       password,
     });

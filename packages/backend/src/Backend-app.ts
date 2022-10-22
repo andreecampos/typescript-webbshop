@@ -1,7 +1,9 @@
 import express, { Application, json } from "express";
 import cors from "cors";
-import User_Controller from "./Controllers/User_Controllers";
+import User_Controller, { UserLogin } from "./Controllers/User_Controllers";
 import { setUpMongoDb } from "./Models/userModel";
+import { autenticateToken } from "./services/userVerify";
+//import itemRouter from "./Controllers/itemTest";
 
 const app: Application = express();
 const mongoUrl: string =
@@ -9,7 +11,10 @@ const mongoUrl: string =
 
 app.use(cors());
 app.use(json());
+app.post("/login", UserLogin);
+app.use("/CreateUser", autenticateToken);
 app.use("/CreateUser", User_Controller);
+//app.use("/testToken", itemRouter);
 
 const port: number = parseInt(process.env.SERVER_PORT || "4000");
 
