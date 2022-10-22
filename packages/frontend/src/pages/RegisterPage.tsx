@@ -5,6 +5,17 @@ import axios from "axios";
 
 axios.defaults.baseURL = "http://localhost:4000";
 
+axios.interceptors.request.use((config) => {
+  if (!config.headers) {
+    config.headers = {};
+  }
+  const jwt = localStorage.getItem("jwt");
+  if (jwt) {
+    config.headers["authorization"] = `Bearer ${jwt}`;
+  }
+  return config;
+});
+
 export default function RegisterPage() {
   const [username, setUsername] = useState<string>("");
   const [mail, setMail] = useState<string>("");
