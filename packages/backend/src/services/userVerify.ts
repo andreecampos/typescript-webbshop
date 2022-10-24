@@ -1,8 +1,7 @@
 import { user_interface } from "@webbshop-app/shared";
 import { Request, Response, NextFunction } from "express";
-import { checkUser } from "../Models/userModel";
+import { checkUser, saveUser, uppdateUser } from "../Models/userModel";
 import jwt from "jsonwebtoken";
-import { send } from "process";
 
 const JWT_SECRET = "hgvdfhbsadfvasdfjvdf";
 
@@ -50,14 +49,49 @@ export const autenticateToken = async (
     try {
       const decoded = jwt.verify(token, JWT_SECRET) as tokenPayload;
       req.jsonToken = decoded;
-      console.log(req.jsonToken.userId);
-      console.log(decoded);
+      // console.log(req.jsonToken.userId);
+      // console.log(decoded);
     } catch {
-      res.sendStatus(403); // bad token
+      //res.sendStatus(403); // bad token
     }
   } else {
-    res.sendStatus(401); //not authorized
+    //res.sendStatus(401); //not authorized
   }
 
   next();
+};
+
+export const registerUser = async (
+  userItem: user_interface,
+  req: JwtReq<any>
+) => {
+  const body = userItem;
+  if (req.jsonToken) {
+    const UserID = req.jsonToken.userId;
+    userItem._id = UserID;
+    try {
+      await uppdateUser(body);
+      console.log("user name is ", req.jsonToken.user);
+      return true;
+    } catch {
+      return "error updating";
+    }
+  }
+
+  if (
+    body.username != "" &&
+    body.password != "" &&
+    body.mail != "" &&
+    body.address != "" &&
+    body.phoneNr != null
+  ) {
+    try {
+      await saveUser(body);
+      return true;
+    } catch {
+      return "username or email already exist";
+    }
+  } else {
+    return "fyll all fields";
+  }
 };
