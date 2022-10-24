@@ -38,3 +38,24 @@ export const saveUser = async (item: user_interface): Promise<void> => {
     throw new Error("ange giltig data");
   }
 };
+export const uppdateUser = async (update: user_interface) => {
+  const { _id, mail, address, password, phoneNr, username } = update;
+  const hashadPassword = await bcrypt.hash(password, 10);
+  console.log(update);
+  const bodyUpdate = await User.updateOne(
+    { _id: _id },
+    {
+      username: username,
+      mail: mail,
+      address: address,
+      phoneNr: phoneNr,
+      password: hashadPassword,
+    }
+  );
+  console.log(bodyUpdate);
+  if (!bodyUpdate) {
+    throw new Error();
+  }
+
+  //const findId = await User.updateOne({});
+};

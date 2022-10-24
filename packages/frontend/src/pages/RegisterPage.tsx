@@ -5,6 +5,17 @@ import axios from "axios";
 
 axios.defaults.baseURL = "http://localhost:4000";
 
+axios.interceptors.request.use((config) => {
+  if (!config.headers) {
+    config.headers = {};
+  }
+  const jwt = localStorage.getItem("jwt");
+  if (jwt) {
+    config.headers["authorization"] = `Bearer ${jwt}`;
+  }
+  return config;
+});
+
 export default function RegisterPage() {
   const [username, setUsername] = useState<string>("");
   const [mail, setMail] = useState<string>("");
@@ -12,7 +23,7 @@ export default function RegisterPage() {
   const [address, setAddress] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [res, setRes] = useState<string | user_interface>("");
-  const [enableButton, setEnableButton] = useState<boolean>(true);
+  //const [enableButton, setEnableButton] = useState<boolean>(true);
 
   const navigate = useNavigate();
 
@@ -28,10 +39,13 @@ export default function RegisterPage() {
     const getData = send.data;
     setRes(getData);
     if (typeof getData === "boolean") {
-      setEnableButton(false);
-      setRes("");
+      navigate("/login");
+      // setEnableButton(false);
+      // setRes("");
     }
   };
+
+  const checkToken = localStorage.getItem("jwt");
 
   return (
     <div>
@@ -44,43 +58,47 @@ export default function RegisterPage() {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
+        <br />
         mail{" "}
         <input
           type="text"
           value={mail}
           onChange={(e) => setMail(e.target.value)}
         />
+        <br />
         Phone number{" "}
         <input
           type="number"
           value={phoneNr}
           onChange={(e) => setPhoneNr(Number(e.target.value))}
         />
+        <br />
         Address{" "}
         <input
           type="text"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
         />
+        <br />
         password{" "}
         <input
           type="text"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={(e) => sendToBackend()}> send </button>
+        <br />
+        {!checkToken ? (
+          <button onClick={(e) => sendToBackend()}> send </button>
+        ) : (
+          <button onClick={(e) => sendToBackend()}> update register </button>
+        )}
       </div>
 
       <div>
         <>{res} </>
       </div>
 
-      <div className="buttonToLogin">
-        <button disabled={enableButton} onClick={(e) => navigate("/login")}>
-          {" "}
-          go to login{" "}
-        </button>
-      </div>
+      <div className="buttonToLogin"></div>
     </div>
   );
 }

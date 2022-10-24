@@ -14,7 +14,7 @@ export default function LoginPage() {
 
   const sendToBackend = async (): Promise<void | string> => {
     console.log(username, password);
-    const send = await axios.post<user_interface>("/CreateUser/login", {
+    const send = await axios.post<user_interface>("/login", {
       username,
       password,
     });
@@ -22,6 +22,7 @@ export default function LoginPage() {
     if (typeof send.data === "object") {
       const token = send.data.token;
       localStorage.setItem("jwt", token);
+      //setRes("");
       navigate("/products");
     }
 
@@ -45,7 +46,8 @@ export default function LoginPage() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={(e) => sendToBackend()}> send </button>
+        <button onClick={(e) => sendToBackend()}> login </button>
+        <button onClick={(e) => navigate("/")}>back to register</button>
       </div>
       <> {res}</>
     </div>
