@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import storeItems from "../data/items.json";
 import { Col, Row } from "react-bootstrap";
 import { StoreItem } from "../components/StoreItem";
+import { Button } from "react-bootstrap";
 // import { ProductSearch } from "../components/ProductSearch";
 
 export default function ProductsPage() {
@@ -30,6 +31,7 @@ export default function ProductsPage() {
                 <Link to={`/details/${item.id}`}>
                   <StoreItem {...item} />
                 </Link>
+                <Button>Add To Cart</Button>
               </Col>
             ))}
         </Row>

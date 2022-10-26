@@ -1,5 +1,4 @@
-import { Button, Card } from "react-bootstrap";
-import React from "react";
+import { Card } from "react-bootstrap";
 
 export interface StoreItemProps {
   id: number;
@@ -11,6 +10,7 @@ export interface StoreItemProps {
   price: number;
   imgUrl: string;
 }
+
 export function StoreItem({ name, price, imgUrl }: StoreItemProps) {
   return (
     <Card>
@@ -26,7 +26,6 @@ export function StoreItem({ name, price, imgUrl }: StoreItemProps) {
           <span className="fs-2">{name}</span>
           <span className="ms-2 text-muted">Price : ${price}</span>
         </Card.Title>
-        <Button>Add To Cart</Button>
       </Card.Body>
     </Card>
   );
